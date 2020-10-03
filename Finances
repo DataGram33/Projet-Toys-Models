@@ -6,7 +6,9 @@ JOIN orders AS o
 ON c.customerNumber = o.customerNumber
 JOIN orderdetails AS od
 ON o.orderNumber = od.orderNumber
-WHERE o.orderDate BETWEEN DATE_SUB(DATE(NOW()), INTERVAL 2 MONTH) AND DATE(NOW()) #a vérifier que les données sont justes
+WHERE YEAR(o.orderDate) = YEAR(DATE(now()))
+AND (MONTH(o.orderDate) = MONTH(DATE(now()))-2 or MONTH(o.orderDate) = MONTH(DATE(now()))-1)
+
 GROUP BY c.country
 ORDER BY c.country
 
